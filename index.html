@@ -45,7 +45,7 @@
 			<img src="http://omwhmsp5m.bkt.clouddn.com/touxiang.jpeg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">尹 晨阳</a></h1>
+		  <h1 class="header-author"><a href="/">Yin Chenyang</a></h1>
 		</hgroup>
 		
 
@@ -105,7 +105,7 @@
 				<img src="http://omwhmsp5m.bkt.clouddn.com/touxiang.jpeg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">尹 晨阳</h1>
+			  <h1 class="header-author js-header-author">Yin Chenyang</h1>
 			</hgroup>
 			
 			
@@ -155,19 +155,361 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-mysql主从复制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/06/blog/">blog</a>
+      <a class="article-title" href="/2017/06/05/mysql主从复制/">mysql主从复制</a>
     </h1>
   
 
         
-        <a href="/2017/04/06/blog/" class="archive-article-date">
+        <a href="/2017/06/05/mysql主从复制/" class="archive-article-date">
+  	<time datetime="2017-06-05T01:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="非常简单的mysql主从复制"><a href="#非常简单的mysql主从复制" class="headerlink" title="非常简单的mysql主从复制"></a>非常简单的mysql主从复制</h1><h2 id="1、主从服务器分别作以下操作："><a href="#1、主从服务器分别作以下操作：" class="headerlink" title="1、主从服务器分别作以下操作："></a>1、主从服务器分别作以下操作：</h2><ul>
+<li><p>1.1、版本一致</p>
+</li>
+<li><p>1.2、初始化表，并在后台启动mysql</p>
+</li>
+<li><p>1.3、修改root的密码</p>
+</li>
+</ul>
+<h2 id="2、修改主服务器master"><a href="#2、修改主服务器master" class="headerlink" title="2、修改主服务器master:"></a>2、修改主服务器master:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#vi /etc/my.cnf</div><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin   //[必须]启用二进制日志</div><div class="line">server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
+<h2 id="3、修改从服务器slave"><a href="#3、修改从服务器slave" class="headerlink" title="3、修改从服务器slave:"></a>3、修改从服务器slave:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#vi /etc/my.cnf</div><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin   //[不是必须]启用二进制日志</div><div class="line">server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</div></pre></td></tr></table></figure>
+<h2 id="4、重启两台服务器的mysql"><a href="#4、重启两台服务器的mysql" class="headerlink" title="4、重启两台服务器的mysql"></a>4、重启两台服务器的mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure>
+<h2 id="5、在主服务器上建立帐户并授权slave"><a href="#5、在主服务器上建立帐户并授权slave" class="headerlink" title="5、在主服务器上建立帐户并授权slave:"></a>5、在主服务器上建立帐户并授权slave:</h2><ul>
+<li><p>进入mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -proot</div></pre></td></tr></table></figure>
+</li>
+<li><p>建立账号admin，密码123，并授权slave</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;GRANT REPLICATION SLAVE ON *.* to &apos;admin&apos;@&apos;%&apos; identified by &apos;123&apos;; //一般不用root账号</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注意：</strong>其中%表示所有客户端都可连，只要帐号，密码正确，此处可用具体客户端IP代替，如’admin’@’192.168.1.226’，加强安全</p>
+<h2 id="6、登录主服务器的mysql，查询master的状态"><a href="#6、登录主服务器的mysql，查询master的状态" class="headerlink" title="6、登录主服务器的mysql，查询master的状态"></a>6、登录主服务器的mysql，查询master的状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;show master status</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">| mysql-bin.000004 |      308 |              |                  |</div><div class="line">+------------------+----------+--------------+------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
+<h2 id="7、配置从服务器Slave："><a href="#7、配置从服务器Slave：" class="headerlink" title="7、配置从服务器Slave："></a>7、配置从服务器Slave：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mysql&gt;change master to master_host=&apos;192.168.145.222&apos;,master_user=&apos;admin&apos;,master_password=&apos;123&apos;,</div><div class="line">master_log_file=&apos;mysql-bin.000004&apos;,master_log_pos=308;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>master_host为你主服务器IP地址，master_log_file为你主服务器查询的File名，master_log_pos为你主服务器查询的Position</p>
+<h2 id="8、开启并检查从服务器复制功能状态："><a href="#8、开启并检查从服务器复制功能状态：" class="headerlink" title="8、开启并检查从服务器复制功能状态："></a>8、开启并检查从服务器复制功能状态：</h2><ul>
+<li><p>开启从服务器slave</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mysql&gt;start slave;    //启动从服务器复制功能</div></pre></td></tr></table></figure>
+</li>
+<li><p>检查从服务器复制功能状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show slave status\G</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">*************************** 1. row ***************************</div><div class="line"></div><div class="line">           Slave_IO_State: Waiting for master to send event</div><div class="line">           Master_Host: 192.168.2.222  //主服务器地址</div><div class="line">           Master_User: admin   //授权帐户名，尽量避免使用root</div><div class="line">           Master_Port: 3306    //数据库端口，部分版本没有此行</div><div class="line">           Connect_Retry: 60</div><div class="line">           Master_Log_File: mysql-bin.000004</div><div class="line">           Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos</div><div class="line">           Relay_Log_File: ddte-relay-bin.000003</div><div class="line">           Relay_Log_Pos: 251</div><div class="line">           Relay_Master_Log_File: mysql-bin.000004</div><div class="line">           Slave_IO_Running: Yes    //此状态必须YES</div><div class="line">           Slave_SQL_Running: Yes     //此状态必须YES</div><div class="line">                 .....</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/05/mysql主从复制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-git技术分享" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/02/git技术分享/">git技术分享</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/02/git技术分享/" class="archive-article-date">
+  	<time datetime="2017-06-02T08:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1、安装git"><a href="#1、安装git" class="headerlink" title="1、安装git"></a>1、安装git</h1><p><strong>图文界面版：</strong></p>
+<p><a href="http://msysgit.github.com/" target="_blank" rel="external">http://msysgit.github.com/</a><br>一路下一步即可，即有小黑框又有图形界面</p>
+<p><strong>小黑框版：</strong></p>
+<ol>
+<li><p>从Git官网下载windows版本的git：<a href="http://git-scm.com/downloads" target="_blank" rel="external">http://git-scm.com/downloads</a></p>
+</li>
+<li><p>一般使用默认设置即可：一路next，git安装完毕！</p>
+</li>
+<li><p>但是如果这时你打开windows的cmd，在里面打git命令会提示“不是内部或外部命令，也不是可运行的程序”，想要直接在windows的cmd里使用git命令要多加如下两步</p>
+</li>
+<li><p>找到git安装路径中bin的位置，如：D:\Program Files\Git\bin</p>
+</li>
+</ol>
+<p>找到git安装路径中git-core的位置，如：D:\Program Files\Git\libexec\git-core;</p>
+<p>注：”D:\Program Files\Git\”是安装路径，可能与你的安装路径不一样，要按照你自己的路径替换”D:\Program Files\Git\”</p>
+<ol>
+<li>右键“计算机”-&gt;“属性”-&gt;“高级系统设置”-&gt;“环境变量”-&gt;在下方的“系统变量”中找到“path”-&gt;选中“path”并选择“编辑”-&gt;将3.1种找到的bin和git-core路径复制到其中-&gt;保存并退出</li>
+</ol>
+<p>注：“path”中，每个路径之间要以英文输入状态下的分号——“;”作为间隔</p>
+<p>现在就可以在cmd里尽情的使用git了~</p>
+<h1 id="2、创建用户名和邮箱"><a href="#2、创建用户名和邮箱" class="headerlink" title="2、创建用户名和邮箱"></a>2、创建用户名和邮箱</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git  config  --gloabal user.name &quot;xxxxxxxx&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git  config  --gloabal user.email &quot;xxxxxxxx@xxxx.xxx&quot;</div></pre></td></tr></table></figure>
+<h1 id="3、建立版本仓库"><a href="#3、建立版本仓库" class="headerlink" title="3、建立版本仓库"></a>3、建立版本仓库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+<h1 id="4、在仓库的工作区创建文件、添加到缓存区、提交到版本仓库"><a href="#4、在仓库的工作区创建文件、添加到缓存区、提交到版本仓库" class="headerlink" title="4、在仓库的工作区创建文件、添加到缓存区、提交到版本仓库"></a>4、在仓库的工作区创建文件、添加到缓存区、提交到版本仓库</h1><ol>
+<li><p>vim 1.php  创建</p>
+</li>
+<li><p>git add 1.php  添加到缓存区</p>
+</li>
+<li><p>git status  查看当前工作区的状态</p>
+</li>
+<li><p>git diff HEAD – 1.php 查看当前修改和版本库中文件的差别</p>
+</li>
+<li><p>git commit -m ‘版本修改说明’</p>
+</li>
+</ol>
+<h1 id="5、版本回退"><a href="#5、版本回退" class="headerlink" title="5、版本回退"></a>5、版本回退</h1><ol>
+<li><p>git log 查看所有的版本信息</p>
+</li>
+<li><p>git reset –hard HEAD^  回到上一版本</p>
+</li>
+<li><p>git reset –hard HEAD^^  回到上上一版本</p>
+</li>
+<li><p>git reset –hard 版本ID</p>
+</li>
+<li><p>git reflog 查看版本操作命令（方便进行版本回到未来的操作）</p>
+</li>
+</ol>
+<h1 id="6、撤销工作区内容的修改（在commit之前）"><a href="#6、撤销工作区内容的修改（在commit之前）" class="headerlink" title="6、撤销工作区内容的修改（在commit之前）"></a>6、撤销工作区内容的修改（在commit之前）</h1><p><strong>(已经add但没有提交)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD 1.php</div></pre></td></tr></table></figure></p>
+<p><strong>(未提交之前的修改)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -- 1.php</div></pre></td></tr></table></figure></p>
+<p>会回退到最初的工作区的状态</p>
+<p>但一旦提交到了版本仓库了之后，那就使用 git rest –hard 版本ID 来实现版本的回退，尽量不要托管到远程仓库再进行修改</p>
+<p>总结：</p>
+<p><strong>场景1</strong>：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout – file。</p>
+<p><strong>场景2</strong>：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。</p>
+<p><strong>场景3</strong>：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。</p>
+<h1 id="7、删除文件"><a href="#7、删除文件" class="headerlink" title="7、删除文件"></a>7、删除文件</h1><ul>
+<li><p>1）先在本地文件管理目录进行删除  git rm 1.php 然后提交到版本仓库 git commit -m ‘delete 1.php’  实现本地和版本仓库的一致性</p>
+</li>
+<li><p>2）撤回删除  git checkout –  1.php </p>
+</li>
+</ul>
+<h1 id="8、远程仓库"><a href="#8、远程仓库" class="headerlink" title="8、远程仓库"></a>8、远程仓库</h1><p><strong>第1步：生成秘钥文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;lau0400810121@163.com&quot;</div></pre></td></tr></table></figure>
+<p>一路下一步，最终在”C:\Users\hasee.ssh“下看到2个文件</p>
+<p><strong>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</strong></p>
+<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：</p>
+<p><strong>第3步：团队开发，添加多个ssh key</strong></p>
+<h1 id="9、添加远程仓库"><a href="#9、添加远程仓库" class="headerlink" title="9、添加远程仓库"></a>9、添加远程仓库</h1><p>在github上创建一个新的仓库，假设仓库名称为study</p>
+<p><strong>本地库与远程库建立联系</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:自己的github账号名/study.git</div></pre></td></tr></table></figure>
+<p><strong>把本地仓库下的内容推送到GitHub仓库中</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<p><strong>把本地master分支推送到远程仓库的master分支中</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master:developer</div></pre></td></tr></table></figure>
+<p>把本地master分支推送到远程仓库的developer分支中,再在远程master中进行合并</p>
+<p><strong>以后只要本地做了提交到本地版本库，就可以使用下面命令推送到GitHub</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p><strong>假如远程仓库已经有了文件了，先得同步到本地</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase origin master</div></pre></td></tr></table></figure>
+<p><strong>或者</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase orgin master</div></pre></td></tr></table></figure>
+<p><strong>从github拉取下来最新的和本地进行合并</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin dev</div></pre></td></tr></table></figure>
+<p>从远程的dev分支上拉取到本地的master分支上</p>
+<ul>
+<li><p>如果远程仓库走的是https协议，必须输入仓库的用户名和密码</p>
+</li>
+<li><p>如果是ssh协议，则不需要，前提是初始化时的用户名和邮箱必须和远程仓库的保持一致</p>
+</li>
+</ul>
+<h1 id="10、从远程库中克隆"><a href="#10、从远程库中克隆" class="headerlink" title="10、从远程库中克隆"></a>10、从远程库中克隆</h1><p>在github上创建一个新的版本仓库，命名为mygit</p>
+<p>克隆远程仓库到本地形成一个本地仓库</p>
+<p>git clone git@github.com:GitHub账号/mygit.git（既可以是git@github.com，也可以是<a href="https://github.com/GitHub账号/mygit.git）" target="_blank" rel="external">https://github.com/GitHub账号/mygit.git）</a></p>
+<p>然后在本地的mygit库中查看同步的文件</p>
+<h1 id="11、分支"><a href="#11、分支" class="headerlink" title="11、分支"></a>11、分支</h1><p><strong>创建并切换到新分支</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b dev</div></pre></td></tr></table></figure></p>
+<p>相当于： git branch dev(创建)    git checkout dev(切换)</p>
+<p>git branch 查看当前分支</p>
+<p><strong>分支合并: </strong></p>
+<p>1.首先切换到主分支上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master</div></pre></td></tr></table></figure></p>
+<p>2.在主分支上进行合并<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge dev</div></pre></td></tr></table></figure></p>
+<p>3.分支删除：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -d dev</div></pre></td></tr></table></figure></p>
+<h1 id="12、冲突解决"><a href="#12、冲突解决" class="headerlink" title="12、冲突解决"></a>12、冲突解决</h1><ol>
+<li><p>当在一个分支上修改一个文件提交到分支版本库时，同时主分支也进行修改该文件并进行提交，<br>接着进行合并时就会出现冲突</p>
+</li>
+<li><p>直接在主分支上打开冲突文件（可以使用git status查看），并进行相应的修改，最后提交即可</p>
+</li>
+<li><p>删除分支</p>
+</li>
+<li><p>以下命令可以看到分支合并图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --graph --pretty=oneline --abbrev-commit</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="13、分支处理策略"><a href="#13、分支处理策略" class="headerlink" title="13、分支处理策略"></a>13、分支处理策略</h1><p>master分支只作为发布版本，平时不在上面操作</p>
+<p>dev分支用来做开发使用，每个人往dev分支上开发，最后进行合并<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</div></pre></td></tr></table></figure></p>
+<h1 id="14、BUG分支"><a href="#14、BUG分支" class="headerlink" title="14、BUG分支"></a>14、BUG分支</h1><p>假定手头有分工作正在dev分支上操作，但是没有完成，但此时需要修复BUG</p>
+<p>可以先隐藏当前的分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git stash</div></pre></td></tr></table></figure></p>
+<p>通过查看工作区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure></p>
+<p>假设需要在主分支上修复BUG，此时切换到主分支上去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master</div></pre></td></tr></table></figure></p>
+<p>在主分支上创建BUG分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b  bug_01</div></pre></td></tr></table></figure></p>
+<p>在BUG分支完成修改提交后，切换到主分支进行合并并删除掉BUG分支</p>
+<p>接着重新跳到dev分支上工作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout dev</div></pre></td></tr></table></figure></p>
+<p>重新返回到原工作区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git stash pop</div></pre></td></tr></table></figure></p>
+<h1 id="15、强行删除（一个未合并的）分支"><a href="#15、强行删除（一个未合并的）分支" class="headerlink" title="15、强行删除（一个未合并的）分支"></a>15、强行删除（一个未合并的）分支</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D feature-vulca</div></pre></td></tr></table></figure>
+<h1 id="16、多人操作"><a href="#16、多人操作" class="headerlink" title="16、多人操作"></a>16、多人操作</h1><p><strong>查看远程仓库</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote  -v</div></pre></td></tr></table></figure></p>
+<p><strong>推送分支</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin dev</div></pre></td></tr></table></figure>
+<ul>
+<li><p>master分支是主分支，因此要时刻与远程同步；</p>
+</li>
+<li><p>dev分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；</p>
+</li>
+<li><p>bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；</p>
+</li>
+<li><p>feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。</p>
+</li>
+</ul>
+<h1 id="17-多人协作开发"><a href="#17-多人协作开发" class="headerlink" title="17 多人协作开发"></a>17 多人协作开发</h1><ul>
+<li><p>多人协作的工作模式通常是这样：</p>
+</li>
+<li><p>首先，可以试图用推送自己的修改；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin branch-name</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；</p>
+</li>
+<li><p>如果合并有冲突，则解决冲突，并在本地提交；</p>
+</li>
+<li><p>没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！</p>
+</li>
+<li><p>如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch –set-upstream branch-name origin/branch-name</p>
+</li>
+</ul>
+<h1 id="18、打标签方面更好的查找，比版本ID更容易记"><a href="#18、打标签方面更好的查找，比版本ID更容易记" class="headerlink" title="18、打标签方面更好的查找，比版本ID更容易记"></a>18、打标签方面更好的查找，比版本ID更容易记</h1><ul>
+<li><p>在指定分支上添加标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git  tag v1.0</div></pre></td></tr></table></figure>
+</li>
+<li><p>查找所有的标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看所有的版本信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log --pretty=oneline --abbrev-commit</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建带有说明的标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -a v0.1 -m &quot;version 0.1 released&quot; 3628164</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看标签信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git show v0.1</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d v0.1</div></pre></td></tr></table></figure>
+</li>
+<li><p>推送标签到远程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git push origin v0.1</div><div class="line">git push origin  --tags</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>删除已经推送到远程的标签</strong></p>
+<ul>
+<li><p>先在本地删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d v0.1</div></pre></td></tr></table></figure>
+</li>
+<li><p>再删除远程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :refs/tags/v0.1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="19、搭建git服务器"><a href="#19、搭建git服务器" class="headerlink" title="19、搭建git服务器"></a>19、搭建git服务器</h1><p><strong>第一步，安装git</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install git</div></pre></td></tr></table></figure></p>
+<p><strong>第二步，创建git用户来管理git</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adduser git</div></pre></td></tr></table></figure></p>
+<p><strong>第三步，创建证书登陆</strong></p>
+<ul>
+<li>收集所有需要登录的用户的公钥，就是他们自己的id_rsa.pub文件，把所有公钥导入到/home/git/.ssh/authorized_keys文件里，一行一个。</li>
+</ul>
+<p><strong>第四步，初始化Git仓库： </strong></p>
+<ul>
+<li><p>先选定一个目录作为Git仓库，假定是/srv/sample.git，在/srv目录下输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init --bare sample.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>Git就会创建一个裸仓库，裸仓库没有工作区，因为服务器上的Git仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的Git仓库通常都以.git结尾。然后，把owner改为git：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R git:git sample.git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>第五步，禁用shell登录：</strong></p>
+<ul>
+<li><p>出于安全考虑，第二步创建的git用户不允许登录shell，这可以通过编辑/etc/passwd文件完成。找到类似下面的一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git:x:1001:1001:,,,:/home/git:/bin/bash</div></pre></td></tr></table></figure>
+</li>
+<li><p>改为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>第六步，克隆远程仓库：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@server:/srv/sample.git</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/02/git技术分享/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-git远程仓库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/06/git远程仓库/">blog</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/06/git远程仓库/" class="archive-article-date">
   	<time datetime="2017-04-06T08:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
 </a>
         
@@ -238,7 +580,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/06/blog/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/06/git远程仓库/">展开全文 >></a>
         </p>
       
 
@@ -266,7 +608,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 尹 晨阳
+    		&copy; 2017 Yin Chenyang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
