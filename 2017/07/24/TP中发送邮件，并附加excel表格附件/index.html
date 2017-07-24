@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | 尹晨阳个人博客</title>
+  <title>TP中发送邮件，并附加excel表格附件 | 尹晨阳个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="尹晨阳个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="TP中发送邮件，并附加excel表格附件1、编写调用方法在common文件夹下新建function.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849function sendmail($to, $name, $subject = &amp;apos;&amp;apos;, $bo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TP中发送邮件，并附加excel表格附件">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/TP中发送邮件，并附加excel表格附件/index.html">
 <meta property="og:site_name" content="尹晨阳个人博客">
+<meta property="og:description" content="TP中发送邮件，并附加excel表格附件1、编写调用方法在common文件夹下新建function.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849function sendmail($to, $name, $subject = &amp;apos;&amp;apos;, $bo">
+<meta property="og:updated_time" content="2017-07-24T07:46:20.364Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="尹晨阳个人博客">
+<meta name="twitter:title" content="TP中发送邮件，并附加excel表格附件">
+<meta name="twitter:description" content="TP中发送邮件，并附加excel表格附件1、编写调用方法在common文件夹下新建function.php12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849function sendmail($to, $name, $subject = &amp;apos;&amp;apos;, $bo">
   
     <link rel="alternative" href="/atom.xml" title="尹晨阳个人博客" type="application/atom+xml">
   
@@ -153,238 +157,138 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-TP中发送邮件，并附加excel表格附件" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      TP中发送邮件，并附加excel表格附件
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/TP中发送邮件，并附加excel表格附件/" class="archive-article-date">
+
+        
+        <a href="/2017/07/24/TP中发送邮件，并附加excel表格附件/" class="archive-article-date">
   	<time datetime="2017-07-24T07:16:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/TP中发送邮件，并附加excel表格附件/">TP中发送邮件，并附加excel表格附件</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TP中发送邮件，并附加excel表格附件"><a href="#TP中发送邮件，并附加excel表格附件" class="headerlink" title="TP中发送邮件，并附加excel表格附件"></a>TP中发送邮件，并附加excel表格附件</h1><h2 id="1、编写调用方法"><a href="#1、编写调用方法" class="headerlink" title="1、编写调用方法"></a>1、编写调用方法</h2><p>在common文件夹下新建function.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">function sendmail($to, $name, $subject = &apos;&apos;, $body = &apos;&apos;, $file = null)&#123;</div><div class="line"></div><div class="line">		vendor(&apos;PHPMailer.smtp&apos;, null, &apos;.class.php&apos;);</div><div class="line">		vendor(&apos;PHPMailer.phpmailer&apos;, null, &apos;.class.php&apos;);</div><div class="line">		$mail = new \PHPMailer(); //PHPMailer对象</div><div class="line"></div><div class="line">		$mail-&gt;CharSet = &apos;UTF-8&apos;; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码</div><div class="line"></div><div class="line">		$mail-&gt;IsSMTP(); // 设定使用SMTP服务</div><div class="line"></div><div class="line">		$mail-&gt;SMTPDebug = 0; // 关闭SMTP调试功能</div><div class="line"></div><div class="line">		// 1 = errors and messages</div><div class="line"></div><div class="line">		// 2 = messages only</div><div class="line"></div><div class="line">		$mail-&gt;SMTPAuth = true; // 启用 SMTP 验证功能</div><div class="line"></div><div class="line">		$mail-&gt;SMTPSecure = &apos;ssl&apos;; // 使用安全协议</div><div class="line"></div><div class="line">		$mail-&gt;Host = $config[&apos;smtp&apos;]; // SMTP 服务器</div><div class="line"></div><div class="line">		$mail-&gt;Port = 465; // SMTP服务器的端口号</div><div class="line"></div><div class="line">		$mail-&gt;Username = $config[&apos;mail&apos;]; // SMTP服务器用户名</div><div class="line"></div><div class="line">		$mail-&gt;Password = $config[&apos;pass&apos;]; // SMTP服务器密码</div><div class="line"></div><div class="line">		$mail-&gt;SetFrom($config[&apos;mail&apos;], $config[&apos;nick&apos;]);</div><div class="line"></div><div class="line">		$replyEmail = &apos;&apos;;</div><div class="line"></div><div class="line">		$replyName = &apos;&apos;;</div><div class="line"></div><div class="line">		$mail-&gt;AddReplyTo($replyEmail, $replyName);</div><div class="line"></div><div class="line">		$mail-&gt;Subject = $subject;</div><div class="line"></div><div class="line">		$mail-&gt;AltBody = &quot;为了查看该邮件，请切换到支持 HTML 的邮件客户端&quot;;</div><div class="line"></div><div class="line">		$mail-&gt;MsgHTML($body);</div><div class="line"></div><div class="line">		$mail-&gt;AddAddress($to, $name);</div><div class="line"></div><div class="line">		is_file($file) &amp;&amp; $mail-&gt;AddAttachment($file,&apos;xxxxxx.xls&apos;); //添加附件并转为xls格式</div><div class="line"></div><div class="line">		return $mail-&gt;Send();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/07/24/TP中发送邮件，并附加excel表格附件/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/27/svn与git的区别/" class="archive-article-date">
-  	<time datetime="2017-06-27T12:04:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/27/svn与git的区别/">svn与git的区别</a>
-    </h1>
+  
+    <a href="/2017/06/27/svn与git的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">svn与git的区别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/gitlab的使用/" class="archive-article-date">
-  	<time datetime="2017-06-09T03:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/gitlab的使用/">gitlab的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/搭建自己的gitlab服务器/" class="archive-article-date">
-  	<time datetime="2017-06-09T02:44:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/搭建自己的gitlab服务器/">搭建自己的gitlab服务器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/05/linux下的数据备份/" class="archive-article-date">
-  	<time datetime="2017-06-05T03:41:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/05/linux下的数据备份/">linux下的数据备份</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/05/mysql主从复制/" class="archive-article-date">
-  	<time datetime="2017-06-05T01:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/05/mysql主从复制/">mysql主从复制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/02/git技术分享/" class="archive-article-date">
-  	<time datetime="2017-06-02T08:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/git技术分享/">git技术分享</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/06/git远程仓库/" class="archive-article-date">
-  	<time datetime="2017-04-06T08:58:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/06/git远程仓库/">blog</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -407,8 +311,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

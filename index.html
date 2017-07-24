@@ -155,6 +155,57 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TP中发送邮件，并附加excel表格附件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/24/TP中发送邮件，并附加excel表格附件/">TP中发送邮件，并附加excel表格附件</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/24/TP中发送邮件，并附加excel表格附件/" class="archive-article-date">
+  	<time datetime="2017-07-24T07:16:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TP中发送邮件，并附加excel表格附件"><a href="#TP中发送邮件，并附加excel表格附件" class="headerlink" title="TP中发送邮件，并附加excel表格附件"></a>TP中发送邮件，并附加excel表格附件</h1><h2 id="1、编写调用方法"><a href="#1、编写调用方法" class="headerlink" title="1、编写调用方法"></a>1、编写调用方法</h2><p>在common文件夹下新建function.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">function sendmail($to, $name, $subject = &apos;&apos;, $body = &apos;&apos;, $file = null)&#123;</div><div class="line"></div><div class="line">		vendor(&apos;PHPMailer.smtp&apos;, null, &apos;.class.php&apos;);</div><div class="line">		vendor(&apos;PHPMailer.phpmailer&apos;, null, &apos;.class.php&apos;);</div><div class="line">		$mail = new \PHPMailer(); //PHPMailer对象</div><div class="line"></div><div class="line">		$mail-&gt;CharSet = &apos;UTF-8&apos;; //设定邮件编码，默认ISO-8859-1，如果发中文此项必须设置，否则乱码</div><div class="line"></div><div class="line">		$mail-&gt;IsSMTP(); // 设定使用SMTP服务</div><div class="line"></div><div class="line">		$mail-&gt;SMTPDebug = 0; // 关闭SMTP调试功能</div><div class="line"></div><div class="line">		// 1 = errors and messages</div><div class="line"></div><div class="line">		// 2 = messages only</div><div class="line"></div><div class="line">		$mail-&gt;SMTPAuth = true; // 启用 SMTP 验证功能</div><div class="line"></div><div class="line">		$mail-&gt;SMTPSecure = &apos;ssl&apos;; // 使用安全协议</div><div class="line"></div><div class="line">		$mail-&gt;Host = $config[&apos;smtp&apos;]; // SMTP 服务器</div><div class="line"></div><div class="line">		$mail-&gt;Port = 465; // SMTP服务器的端口号</div><div class="line"></div><div class="line">		$mail-&gt;Username = $config[&apos;mail&apos;]; // SMTP服务器用户名</div><div class="line"></div><div class="line">		$mail-&gt;Password = $config[&apos;pass&apos;]; // SMTP服务器密码</div><div class="line"></div><div class="line">		$mail-&gt;SetFrom($config[&apos;mail&apos;], $config[&apos;nick&apos;]);</div><div class="line"></div><div class="line">		$replyEmail = &apos;&apos;;</div><div class="line"></div><div class="line">		$replyName = &apos;&apos;;</div><div class="line"></div><div class="line">		$mail-&gt;AddReplyTo($replyEmail, $replyName);</div><div class="line"></div><div class="line">		$mail-&gt;Subject = $subject;</div><div class="line"></div><div class="line">		$mail-&gt;AltBody = &quot;为了查看该邮件，请切换到支持 HTML 的邮件客户端&quot;;</div><div class="line"></div><div class="line">		$mail-&gt;MsgHTML($body);</div><div class="line"></div><div class="line">		$mail-&gt;AddAddress($to, $name);</div><div class="line"></div><div class="line">		is_file($file) &amp;&amp; $mail-&gt;AddAttachment($file,&apos;xxxxxx.xls&apos;); //添加附件并转为xls格式</div><div class="line"></div><div class="line">		return $mail-&gt;Send();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/24/TP中发送邮件，并附加excel表格附件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-svn与git的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
