@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/11/创建TCP服务器/index.html">
 <meta property="og:site_name" content="尹晨阳个人博客">
 <meta property="og:description" content="创建TCP服务器新建一个server.php文件1vi server.php 12345678910111213141516171819202122232425//开启两个进程$serv-&amp;gt;set([    &amp;apos;worker_num&amp;apos; =&amp;gt; 2,]);//创建Server对象，监听 127.0.0.1:9501端口$serv = new swoole_server(&amp;">
-<meta property="og:updated_time" content="2017-09-11T12:52:02.915Z">
+<meta property="og:updated_time" content="2017-09-11T12:54:46.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建TCP服务器">
 <meta name="twitter:description" content="创建TCP服务器新建一个server.php文件1vi server.php 12345678910111213141516171819202122232425//开启两个进程$serv-&amp;gt;set([    &amp;apos;worker_num&amp;apos; =&amp;gt; 2,]);//创建Server对象，监听 127.0.0.1:9501端口$serv = new swoole_server(&amp;">
@@ -185,7 +185,7 @@
 <p><strong>注意：</strong>没有安装telnet的可以运行以下代码安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install telnet -y</div></pre></td></tr></table></figure></p>
 <p><strong>注意：</strong>关闭telnet命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctrl+]</div><div class="line">telnet&gt; quit</div></pre></td></tr></table></figure></p>
 <p>输入CTRL+]后再输入quit即可</p>
-
+<h2 id="查看server监听端口状态"><a href="#查看server监听端口状态" class="headerlink" title="查看server监听端口状态"></a>查看server监听端口状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">netstat -an| grep 9501</div><div class="line">tcp        0      0 127.0.0.1:9501              0.0.0.0:*                   LISTEN</div></pre></td></tr></table></figure>
       
 
       
