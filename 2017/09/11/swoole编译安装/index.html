@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 尹晨阳个人博客</title>
+  <title>swoole编译安装 | 尹晨阳个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="尹晨阳个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swoole编译安装">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/swoole编译安装/index.html">
 <meta property="og:site_name" content="尹晨阳个人博客">
+<meta property="og:description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
+<meta property="og:updated_time" content="2017-09-11T11:43:34.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="尹晨阳个人博客">
+<meta name="twitter:title" content="swoole编译安装">
+<meta name="twitter:description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
   
     <link rel="alternative" href="/atom.xml" title="尹晨阳个人博客" type="application/atom+xml">
   
@@ -153,296 +157,154 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-swoole编译安装" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      swoole编译安装
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/swoole编译安装/" class="archive-article-date">
+
+        
+        <a href="/2017/09/11/swoole编译安装/" class="archive-article-date">
   	<time datetime="2017-09-11T11:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/swoole编译安装/">swoole编译安装</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="swoole编译安装"><a href="#swoole编译安装" class="headerlink" title="swoole编译安装"></a>swoole编译安装</h2><p><strong>Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。</strong></p>
+<ul>
+<li>请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过</li>
+<li>如果当前用户不是root，可能没有php目录的写权限，安装时需要<code>sudo</code>或者<code>su</code></li>
+<li>如果是在git分支上直接<code>git pull</code>更新代码，重新编译前务必要执行<code>make clean</code></li>
+</ul>
+<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>安装swoole前必须保证系统已经安装了下列软件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">php-5.3.10 或更高版本</div><div class="line">gcc-4.4 或更高版本</div><div class="line">make</div><div class="line">autoconf</div><div class="line">pcre (centos系统可以执行命令：yum install pcre-devel)</div></pre></td></tr></table></figure></p>
+<p>全部可以yum安装</p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><ul>
+<li><a href="https://github.com/swoole/swoole-src/releases" target="_blank" rel="external">https://github.com/swoole/swoole-src/releases</a></li>
+<li><a href="http://pecl.php.net/package/swoole" target="_blank" rel="external">http://pecl.php.net/package/swoole</a></li>
+<li><a href="http://git.oschina.net/swoole/swoole" target="_blank" rel="external">http://git.oschina.net/swoole/swoole</a></li>
+</ul>
+<h2 id="下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装"><a href="#下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装" class="headerlink" title="下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装"></a>下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd swoole</div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make </div><div class="line">sudo make install</div></pre></td></tr></table></figure>
+<h2 id="PECL"><a href="#PECL" class="headerlink" title="PECL"></a>PECL</h2><p>swoole项目已收录到PHP官方扩展库，除了手工下载编译外，还可以通过PHP官方提供的pecl命令，一键下载安装swoole<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pecl install swoole</div></pre></td></tr></table></figure></p>
+<h2 id="配置php-ini"><a href="#配置php-ini" class="headerlink" title="配置php.ini"></a>配置php.ini</h2><p>编译安装成功后，修改php.ini加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extension=swoole.so</div></pre></td></tr></table></figure></p>
+<p>通过<code>php -m</code>或<code>phpinfo()</code>来查看是否成功加载了swoole，如果没有可能是<code>php.ini</code>的路径不对，可以使用<code>php -i |grep php.ini</code>来定位到<code>php.ini</code>的绝对路径</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/11/swoole编译安装/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/swoole环境依赖/" class="archive-article-date">
-  	<time datetime="2017-09-11T11:03:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/swoole环境依赖/">swoole环境依赖</a>
-    </h1>
+  
+    <a href="/2017/09/11/swoole环境依赖/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">swoole环境依赖</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/swoole入门/" class="archive-article-date">
-  	<time datetime="2017-09-11T10:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/swoole入门/">swoole入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/linux搭建svn仓库/" class="archive-article-date">
-  	<time datetime="2017-09-11T09:35:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/linux搭建svn仓库/">linux搭建svn仓库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/linux搭建lamp环境/" class="archive-article-date">
-  	<time datetime="2017-09-11T06:24:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/linux搭建lamp环境/">linux搭建lamp环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/TP中发送邮件，并附加excel表格附件/" class="archive-article-date">
-  	<time datetime="2017-07-24T07:16:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/TP中发送邮件，并附加excel表格附件/">TP中发送邮件，并附加excel表格附件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/27/svn与git的区别/" class="archive-article-date">
-  	<time datetime="2017-06-27T12:04:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/27/svn与git的区别/">svn与git的区别</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/gitlab的使用/" class="archive-article-date">
-  	<time datetime="2017-06-09T03:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/gitlab的使用/">gitlab的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/搭建自己的gitlab服务器/" class="archive-article-date">
-  	<time datetime="2017-06-09T02:44:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/搭建自己的gitlab服务器/">搭建自己的gitlab服务器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/05/linux下的数据备份/" class="archive-article-date">
-  	<time datetime="2017-06-05T03:41:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/05/linux下的数据备份/">linux下的数据备份</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -465,8 +327,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
