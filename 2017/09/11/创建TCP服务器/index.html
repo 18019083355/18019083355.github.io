@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>swoole编译安装 | 尹晨阳个人博客</title>
+  <title>创建TCP服务器 | 尹晨阳个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
+  <meta name="description" content="创建TCP服务器新建一个server.php文件1vi server.php 12345678910111213141516171819202122232425//开启两个进程$serv-&amp;gt;set([    &amp;apos;worker_num&amp;apos; =&amp;gt; 2,]);//创建Server对象，监听 127.0.0.1:9501端口$serv = new swoole_server(&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="swoole编译安装">
-<meta property="og:url" content="http://yoursite.com/2017/09/11/swoole编译安装/index.html">
+<meta property="og:title" content="创建TCP服务器">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/创建TCP服务器/index.html">
 <meta property="og:site_name" content="尹晨阳个人博客">
-<meta property="og:description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
-<meta property="og:updated_time" content="2017-09-11T12:11:32.257Z">
+<meta property="og:description" content="创建TCP服务器新建一个server.php文件1vi server.php 12345678910111213141516171819202122232425//开启两个进程$serv-&amp;gt;set([    &amp;apos;worker_num&amp;apos; =&amp;gt; 2,]);//创建Server对象，监听 127.0.0.1:9501端口$serv = new swoole_server(&amp;">
+<meta property="og:updated_time" content="2017-09-11T12:52:02.915Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="swoole编译安装">
-<meta name="twitter:description" content="swoole编译安装Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。  请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过 如果当前用户不是root，可能没有php目录的写权限，安装时需要sudo或者su 如果是在git分支上直接g">
+<meta name="twitter:title" content="创建TCP服务器">
+<meta name="twitter:description" content="创建TCP服务器新建一个server.php文件1vi server.php 12345678910111213141516171819202122232425//开启两个进程$serv-&amp;gt;set([    &amp;apos;worker_num&amp;apos; =&amp;gt; 2,]);//创建Server对象，监听 127.0.0.1:9501端口$serv = new swoole_server(&amp;">
   
     <link rel="alternative" href="/atom.xml" title="尹晨阳个人博客" type="application/atom+xml">
   
@@ -157,48 +157,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-swoole编译安装" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-创建TCP服务器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      swoole编译安装
+      创建TCP服务器
     </h1>
   
 
         
-        <a href="/2017/09/11/swoole编译安装/" class="archive-article-date">
-  	<time datetime="2017-09-11T11:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+        <a href="/2017/09/11/创建TCP服务器/" class="archive-article-date">
+  	<time datetime="2017-09-11T12:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="swoole编译安装"><a href="#swoole编译安装" class="headerlink" title="swoole编译安装"></a>swoole编译安装</h2><p><strong>Swoole扩展是按照php标准扩展构建的。使用phpize来生成php编译配置，./configure来做编译配置检测，make进行编译，make install进行安装。</strong></p>
-<ul>
-<li>请下载releases版本的swoole，直接从github主干上拉取最新代码可能会编译不过</li>
-<li>如果当前用户不是root，可能没有php目录的写权限，安装时需要<code>sudo</code>或者<code>su</code></li>
-<li>如果是在git分支上直接<code>git pull</code>更新代码，重新编译前务必要执行<code>make clean</code></li>
-</ul>
-<h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><p>安装swoole前必须保证系统已经安装了下列软件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">php-5.3.10 或更高版本</div><div class="line">gcc-4.4 或更高版本</div><div class="line">make</div><div class="line">autoconf</div><div class="line">pcre (centos系统可以执行命令：yum install pcre-devel)</div></pre></td></tr></table></figure></p>
-<p>全部可以yum安装</p>
-<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><ul>
-<li><a href="https://github.com/swoole/swoole-src/releases" target="_blank" rel="external">https://github.com/swoole/swoole-src/releases</a></li>
-<li><a href="http://pecl.php.net/package/swoole" target="_blank" rel="external">http://pecl.php.net/package/swoole</a></li>
-<li><a href="http://git.oschina.net/swoole/swoole" target="_blank" rel="external">http://git.oschina.net/swoole/swoole</a></li>
-</ul>
-<h2 id="下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装"><a href="#下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装" class="headerlink" title="下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装"></a>下载源代码包后，在终端进入源码目录，执行下面的命令进行编译和安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd swoole</div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make </div><div class="line">sudo make install</div></pre></td></tr></table></figure>
-<p><strong>注意：</strong>phpize属于php-devel的内容在centos中只要运行如下命令安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php-devel</div></pre></td></tr></table></figure></p>
-<h2 id="PECL"><a href="#PECL" class="headerlink" title="PECL"></a>PECL</h2><p>swoole项目已收录到PHP官方扩展库，除了手工下载编译外，还可以通过PHP官方提供的pecl命令，一键下载安装swoole<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pecl install swoole</div></pre></td></tr></table></figure></p>
-<h2 id="配置php-ini"><a href="#配置php-ini" class="headerlink" title="配置php.ini"></a>配置php.ini</h2><p>编译安装成功后，修改php.ini加入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">extension=swoole.so</div></pre></td></tr></table></figure></p>
-<p>通过<code>$ php -m | grep swoole</code>或<code>phpinfo()</code>来查看是否成功加载了swoole，如果没有可能是<code>php.ini</code>的路径不对，可以使用<code>php -i |grep php.ini</code>来定位到<code>php.ini</code>的绝对路径</p>
-<h2 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">php --ri swoole | grep Version</div><div class="line">#结果</div><div class="line">Version =&gt; 1.9.6</div></pre></td></tr></table></figure>
-<h2 id="编译升级"><a href="#编译升级" class="headerlink" title="编译升级"></a>编译升级</h2><p>编译升级，只需要从pecl官网下载最新的稳定版，按照我们一开始的编译安装步骤再走一遍就完事了。之前安装的版本不需要过问，这就相当于重新安装一次新版本就好了。</p>
-<p>友情提醒，尽可能的下载稳定版，非稳定版可能会发生很多意外的事。</p>
-<h2 id="pecl升级"><a href="#pecl升级" class="headerlink" title="pecl升级"></a>pecl升级</h2><p>这个更简单，一条命令搞定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pecl upgrade swoole</div></pre></td></tr></table></figure></p>
+        <h2 id="创建TCP服务器"><a href="#创建TCP服务器" class="headerlink" title="创建TCP服务器"></a>创建TCP服务器</h2><p>新建一个server.php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi server.php</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//开启两个进程</div><div class="line">$serv-&gt;set([</div><div class="line">    &apos;worker_num&apos; =&gt; 2,</div><div class="line">]);</div><div class="line"></div><div class="line">//创建Server对象，监听 127.0.0.1:9501端口</div><div class="line">$serv = new swoole_server(&quot;127.0.0.1&quot;, 9501); </div><div class="line"></div><div class="line">//监听连接进入事件</div><div class="line">$serv-&gt;on(&apos;connect&apos;, function ($serv, $fd) &#123;  </div><div class="line">    echo &quot;Client: Connect.\n&quot;;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//监听数据接收事件</div><div class="line">$serv-&gt;on(&apos;receive&apos;, function ($serv, $fd, $from_id, $data) &#123;</div><div class="line">    $serv-&gt;send($fd, &quot;Server: &quot;.$data);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//监听连接关闭事件</div><div class="line">$serv-&gt;on(&apos;close&apos;, function ($serv, $fd) &#123;</div><div class="line">    echo &quot;Client: Close.\n&quot;;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//启动服务器</div><div class="line">$serv-&gt;start();</div></pre></td></tr></table></figure>
+<p>这里就创建了一个TCP服务器，监听本机9501端口。它的逻辑很简单，当客户端Socket通过网络发送一个 <code>hello</code> 字符串时，服务器会回复一个 <code>Server: hello</code> 字符串。</p>
+<h2 id="执行程序"><a href="#执行程序" class="headerlink" title="执行程序"></a>执行程序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php server.php</div></pre></td></tr></table></figure>
+<p>在命令行下运行server.php程序，启动成功后可以使用 <code>netstat</code> 工具看到，已经在监听9501端口。这时就可以使用telnet/netcat工具连接服务器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">telnet 127.0.0.1 9501</div><div class="line">hello</div><div class="line">Server: hello</div></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>没有安装telnet的可以运行以下代码安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install telnet -y</div></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>关闭telnet命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctrl+]</div><div class="line">telnet&gt; quit</div></pre></td></tr></table></figure></p>
+<p>输入CTRL+]后再输入quit即可</p>
 
       
 
@@ -278,7 +264,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/11/swoole编译安装/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/11/创建TCP服务器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,18 +278,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/11/创建TCP服务器/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          创建TCP服务器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/11/swoole环境依赖/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">swoole环境依赖</div>
+    <a href="/2017/09/11/swoole编译安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">swoole编译安装</div>
       <i class="icon-circle-right"></i>
     </a>
   
