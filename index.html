@@ -175,13 +175,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="swoole环境依赖"><a href="#swoole环境依赖" class="headerlink" title="swoole环境依赖"></a>swoole环境依赖</h2><ul>
-<li>仅支持Linux，FreeBSD，MacOS，3类操作系统</li>
-<li>‘Linux’内核版本2.3.32以上</li>
-<li>‘PHP-5.3.10’以上版本，包括PHP7</li>
-<li>‘gcc4.4’以上版本或者clang</li>
-<li>‘cmake2.4+’，编译为libswoole.so作为C/C++库时需要使用cmake</li>
-<li>建议使用’Ubuntu14’、’CentOS7’或更高版本的操作系统</li>
+        <h2 id="swoole环境依赖"><a href="#swoole环境依赖" class="headerlink" title="swoole环境依赖"></a>swoole环境依赖</h2><p><em>仅支持Linux，FreeBSD，MacOS，3类操作系统</em></p>
+<ul>
+<li><code>Linux</code>内核版本2.3.32以上</li>
+<li><code>PHP-5.3.10</code>以上版本，包括PHP7</li>
+<li><code>gcc4.4</code>以上版本或者clang</li>
+<li><code>cmake2.4+</code>，编译为libswoole.so作为C/C++库时需要使用cmake</li>
+<li><font color="red">建议使用<code>Ubuntu14</code>、<code>CentOS7</code>或更高版本的操作系统</font>
+
+</li>
 </ul>
 <h2 id="PHP版本依赖"><a href="#PHP版本依赖" class="headerlink" title="PHP版本依赖"></a>PHP版本依赖</h2><ul>
 <li>仅支持<code>PHP-5.3.10</code>或更高版本</li>
@@ -215,9 +217,9 @@
 </ul>
 <h2 id="DockerOnWindows"><a href="#DockerOnWindows" class="headerlink" title="DockerOnWindows"></a>DockerOnWindows</h2><p>在Windows下开发可以使用Hyper-V+Docker来方便的开发Swoole应用，安装好Docker后再Settings里的<br>Shared Droves 选项里共享代码所在磁盘。然后使用如下命令来快速启动Docker容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --rm -t -i --name myapp -p 9501:9501 -v e:/path/to:/app:rw xutongle/php:7.1-fpm /bin/bash</div></pre></td></tr></table></figure></p>
 <ul>
-<li>e:/path/to为源码所在路径</li>
-<li>/app 为容器内路径</li>
-<li>在bash里执行 cd /app &amp;&amp; php server.php</li>
+<li><code>e:/path/to</code>为源码所在路径</li>
+<li><code>/app</code> 为容器内路径</li>
+<li>在bash里执行 <code>cd /app &amp;&amp; php server.php</code></li>
 </ul>
 
       
