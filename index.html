@@ -155,6 +155,66 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux搭建lamp环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/linux搭建lamp环境/">linux搭建lamp环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/linux搭建lamp环境/" class="archive-article-date">
+  	<time datetime="2017-09-11T06:24:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="centOs6-4搭建lamp环境"><a href="#centOs6-4搭建lamp环境" class="headerlink" title="centOs6.4搭建lamp环境"></a>centOs6.4搭建lamp环境</h1><h2 id="1、更新yum安装包"><a href="#1、更新yum安装包" class="headerlink" title="1、更新yum安装包"></a>1、更新yum安装包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm</div></pre></td></tr></table></figure>
+<h2 id="2、yum安装php及其扩展-7-0"><a href="#2、yum安装php及其扩展-7-0" class="headerlink" title="2、yum安装php及其扩展(7.0)"></a>2、yum安装php及其扩展(7.0)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install php70w php70w-cli php70w-common php70w-gd php70w-ldap php70w-mbstring php70w-libmcrypt php70w-mysql php70w-pdo php70w-fpm</div></pre></td></tr></table></figure>
+<h2 id="3、yum安装mysql和apache及扩展"><a href="#3、yum安装mysql和apache及扩展" class="headerlink" title="3、yum安装mysql和apache及扩展"></a>3、yum安装mysql和apache及扩展</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install httpd mysql mysql-server httpd-manual mod_ssl mod_perl mod_auth_mysql mysql-connector-odbc mysql-devel libdbi-dbd-mysql</div></pre></td></tr></table></figure>
+<h2 id="4、启动mysql服务器"><a href="#4、启动mysql服务器" class="headerlink" title="4、启动mysql服务器"></a>4、启动mysql服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure>
+<h2 id="5、默认密码为空，修改密码"><a href="#5、默认密码为空，修改密码" class="headerlink" title="5、默认密码为空，修改密码"></a>5、默认密码为空，修改密码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">update mysql.user set password=&apos;密码&apos; where User=&apos;root&apos; and Host=&apos;localhost&apos;;</div></pre></td></tr></table></figure>
+<h2 id="6、配置远程连接数据库的权限"><a href="#6、配置远程连接数据库的权限" class="headerlink" title="6、配置远程连接数据库的权限"></a>6、配置远程连接数据库的权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;密码&apos; with grant option;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 其中<em>.</em>表示所有数据库的所有表’root’@’%’表示用户名为root所有ip都可以连接</p>
+<h2 id="7、开启防火墙"><a href="#7、开启防火墙" class="headerlink" title="7、开启防火墙"></a>7、开启防火墙</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
+<p>添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT</div></pre></td></tr></table></figure></p>
+<p>至22端口后面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/11/linux搭建lamp环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-TP中发送邮件，并附加excel表格附件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
