@@ -187,6 +187,38 @@
 <li>仅支持<code>PHP-5.3.10</code>或更高版本</li>
 <li>不依赖<code>PHP</code>的<code>stream</code>、<code>sockets</code>、<code>pcntl</code>、<code>posix</code>、<code>sysvmsg</code>等扩展。<code>PHP</code>只需安装最基本的扩展即可</li>
 </ul>
+<h2 id="推荐使用的Linux发行版"><a href="#推荐使用的Linux发行版" class="headerlink" title="推荐使用的Linux发行版"></a>推荐使用的Linux发行版</h2><ul>
+<li>CentOS6.2+</li>
+<li>Ubuntu12+</li>
+<li>Debian6+</li>
+</ul>
+<h2 id="ARM平台（树莓派Raspberry-PI）"><a href="#ARM平台（树莓派Raspberry-PI）" class="headerlink" title="ARM平台（树莓派Raspberry PI）"></a>ARM平台（树莓派Raspberry PI）</h2><ul>
+<li>请使用swoole-1.7.10或更高版本</li>
+<li>使用GCC交叉编译</li>
+<li>在编译Swoole时，需要手工修改Makefile去掉-O2编译参数</li>
+</ul>
+<h2 id="MIPS平台（OpenWrt路由器）"><a href="#MIPS平台（OpenWrt路由器）" class="headerlink" title="MIPS平台（OpenWrt路由器）"></a>MIPS平台（OpenWrt路由器）</h2><ul>
+<li>请使用swoole-1.7.21或更高版本</li>
+<li>使用GCC交叉编译</li>
+</ul>
+<h2 id="CygWin环境支持（Windows系统）"><a href="#CygWin环境支持（Windows系统）" class="headerlink" title="CygWin环境支持（Windows系统）"></a>CygWin环境支持（Windows系统）</h2><p>swoole-1.7.7增加了对cygwin环境的支持，在Windows环境下，可以直接使用cygwin + php 来跑swoole程序。</p>
+<ul>
+<li>安装cygwin，并安装gcc、make、autoconf、php 4个包</li>
+<li>下载swoole源码，在cygwin-shell中进行phpize/configure/make/make install</li>
+<li>修改php.ini，加入swoole.so</li>
+<li>cygwin模式下需要对PHP进行简化，去掉不使用的扩展，避免进程占用内存过大，导致Fork操作失败</li>
+</ul>
+<h2 id="BashOnWindows"><a href="#BashOnWindows" class="headerlink" title="BashOnWindows"></a>BashOnWindows</h2><p>Windows 10系统增加了Linux子系统支持，BashOnWindows环境下也可以使用swoole。安装命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apt-get install libpcre3 libpcre3-dev php5 php5-dev php5-cli php5-fpm php5-curl php5-mysql php5-intl php5-xmlrpc php5-geoip php5-mysqlnd php5-mcrypt php5-memcached php5-redis php5-tidy php5-sqlite php5-json php5-gmp php5-gd php5-readline php5-imagick</div><div class="line">pecl install swoole</div><div class="line">echo &apos;extension=swoole.so&apos; &gt;&gt; /usr/php5/mods-available/swoole.ini</div><div class="line">cd /usr/php5/cli/conf.d/ &amp;&amp; ln -s ../../mods-available/swoole.ini 20-swoole.ini</div><div class="line">cd /usr/php5/fpm/conf.d/ &amp;&amp; ln -s ../../mods-available/swoole.ini 20-swoole.ini</div></pre></td></tr></table></figure></p>
+<ul>
+<li>BashOnWindows环境下必须关闭<code>daemonize</code>选项</li>
+<li>需要修改<code>config.h</code>关闭<code>HAVE_SIGNALFD</code></li>
+</ul>
+<h2 id="DockerOnWindows"><a href="#DockerOnWindows" class="headerlink" title="DockerOnWindows"></a>DockerOnWindows</h2><p>在Windows下开发可以使用Hyper-V+Docker来方便的开发Swoole应用，安装好Docker后再Settings里的<br>Shared Droves 选项里共享代码所在磁盘。然后使用如下命令来快速启动Docker容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --rm -t -i --name myapp -p 9501:9501 -v e:/path/to:/app:rw xutongle/php:7.1-fpm /bin/bash</div></pre></td></tr></table></figure></p>
+<ul>
+<li>e:/path/to为源码所在路径</li>
+<li>/app 为容器内路径</li>
+<li>在bash里执行 cd /app &amp;&amp; php server.php</li>
+</ul>
 
       
 
