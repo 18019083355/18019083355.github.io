@@ -155,6 +155,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-搭建自己的gitlab服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/09/搭建自己的gitlab服务器/">搭建自己的gitlab服务器</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/09/搭建自己的gitlab服务器/" class="archive-article-date">
+  	<time datetime="2017-06-09T02:44:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ubuntu14-04-安装gitlab"><a href="#ubuntu14-04-安装gitlab" class="headerlink" title="ubuntu14.04 安装gitlab"></a>ubuntu14.04 安装gitlab</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>GitLab 是一个用于仓库管理系统的开源项目。使用Git作为代码管理工具，并在此基础上搭建起来的web服务。它提供Git版本控制、代码检查、Bug跟踪和Wiki，它可以通过LDAP或活动目录来进行安全认证和授权。单个GitLab可以支持25000个用户，同时它也可以通过设置多台服务器来实现其高可用性。GitLab并没有被收入到Ubuntu14.04软件库中，但安装GitLab却也十分方便，下面讲讲如何安装GitLab：</p>
+<h2 id="1、下载ubuntu14-04镜像文件"><a href="#1、下载ubuntu14-04镜像文件" class="headerlink" title="1、下载ubuntu14.04镜像文件"></a>1、下载ubuntu14.04镜像文件</h2><p>我自己找了很久找到的非常快，非传齐全的开源镜像站：</p>
+<p>传送门：<a href="http://mirrors.163.com/" target="_blank" rel="external">网易开源镜像站</a></p>
+<ul>
+<li><p>选择ubuntu-releases/</p>
+</li>
+<li><p>选择14.04版本</p>
+</li>
+<li><p>建议选择ubuntu-14.04.5-desktop-amd64.iso这是桌面版64位</p>
+</li>
+</ul>
+<h2 id="2、下载完成后安装到VM虚拟机"><a href="#2、下载完成后安装到VM虚拟机" class="headerlink" title="2、下载完成后安装到VM虚拟机"></a>2、下载完成后安装到VM虚拟机</h2><p><strong>提示：</strong>CTRL+ALT+F1和CTRL+ALT+F7可以在图形与命令界面之间切换</p>
+<h2 id="3、下载gitlab相关的文件"><a href="#3、下载gitlab相关的文件" class="headerlink" title="3、下载gitlab相关的文件"></a>3、下载gitlab相关的文件</h2><ul>
+<li><p>gitlab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -c https://downloads-packages.s3.amazonaws.com/ubuntu-14.04/gitlab_7.0.0-omnibus-1_amd64.deb</div></pre></td></tr></table></figure>
+</li>
+<li><p>openssh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openssh-server</div></pre></td></tr></table></figure>
+</li>
+<li><p>邮箱服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install postfix</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dpkg -i gitlab_7.0.0-omnibus-1_amd64.deb</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4、设置GitLab的域名："><a href="#4、设置GitLab的域名：" class="headerlink" title="4、设置GitLab的域名："></a>4、设置GitLab的域名：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /etc/gitlab</div><div class="line">sudo touch /etc/gitlab/gitlab.rb</div><div class="line">sudo chmod 600 /etc/gitlab/gitlab.rb</div><div class="line">sudo vi /etc/gitlab/gitlab.rb</div></pre></td></tr></table></figure>
+<h2 id="5、添加域名和邮箱配置"><a href="#5、添加域名和邮箱配置" class="headerlink" title="5、添加域名和邮箱配置"></a>5、添加域名和邮箱配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">external_url &apos;http://192.168.1.110&apos;</div><div class="line">gitlab_rails[&apos;smtp_enable&apos;] = true</div><div class="line">gitlab_rails[&apos;smtp_address&apos;] = &quot;smtp.163.com&quot;</div><div class="line">gitlab_rails[&apos;smtp_port&apos;] = 25 </div><div class="line">gitlab_rails[&apos;smtp_user_name&apos;] = &quot;18019083355@163.com&quot;</div><div class="line">gitlab_rails[&apos;smtp_password&apos;] = &quot;yin359484005&quot;</div><div class="line">gitlab_rails[&apos;smtp_domain&apos;] = &quot;163.com&quot;</div><div class="line">gitlab_rails[&apos;smtp_authentication&apos;] = :login</div><div class="line">gitlab_rails[&apos;smtp_enable_starttls_auto&apos;] = true</div><div class="line"></div><div class="line">gitlab_rails[&apos;gitlab_email_from&apos;] = &quot;18019083355@163.com&quot;</div><div class="line">user[&quot;git_user_email&quot;] = &quot;18019083355@163.com&quot;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>参数请自行修改</p>
+<h2 id="6、对GitLab进行重配置"><a href="#6、对GitLab进行重配置" class="headerlink" title="6、对GitLab进行重配置"></a>6、对GitLab进行重配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl reconfigure</div></pre></td></tr></table></figure>
+<h2 id="7、检测是否安装成功"><a href="#7、检测是否安装成功" class="headerlink" title="7、检测是否安装成功"></a>7、检测是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl status</div></pre></td></tr></table></figure>
+<p>出现如下相似结果，恭喜你已安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[sudo] password for firehare: </div><div class="line">run: nginx: (pid 13334) 16103s; run: log: (pid 4244) 22211s</div><div class="line">run: postgresql: (pid 4153) 22280s; run: log: (pid 4152) 22280s</div><div class="line">run: redis: (pid 4070) 22291s; run: log: (pid 4069) 22291s</div><div class="line">run: sidekiq: (pid 4234) 22212s; run: log: (pid 4233) 22212s</div><div class="line">run: unicorn: (pid 4212) 22218s; run: log: (pid 4211) 22218s</div></pre></td></tr></table></figure></p>
+<h2 id="8、打开浏览器进入gitlab后台"><a href="#8、打开浏览器进入gitlab后台" class="headerlink" title="8、打开浏览器进入gitlab后台"></a>8、打开浏览器进入gitlab后台</h2><ul>
+<li><p>虚拟机访问localhost</p>
+</li>
+<li><p>本地访问192.168.1.110</p>
+</li>
+<li><p>默认管理员账号密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Username: root Password: 5iveL!fe</div></pre></td></tr></table></figure>
+</li>
+<li><p>第一次登陆后会自动让你修改密码</p>
+</li>
+</ul>
+<p><strong>注意：</strong> IP地址请自行修改</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/09/搭建自己的gitlab服务器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-linux下的数据备份" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
