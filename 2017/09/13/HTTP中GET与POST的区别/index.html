@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://omwhmsp5m.bkt.clouddn.com/get5.jpg">
 <meta property="og:image" content="http://omwhmsp5m.bkt.clouddn.com/get6.jpg">
 <meta property="og:image" content="http://omwhmsp5m.bkt.clouddn.com/get7.jpg">
-<meta property="og:updated_time" content="2017-09-13T07:26:27.255Z">
+<meta property="og:updated_time" content="2017-09-13T07:30:00.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP中GET与POST的区别">
 <meta name="twitter:description" content="概述GET和POST是HTTP请求的两种基本方法，要说它们的区别，接触过WEB开发的人都能说出一二。 最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。 你可能自己写过无数个GET和POST请求，或者已经看过很多权威网站总结出的他们的区别，你非常清楚知道什么时候该用什么。 当你在面试中被问到这个问题，你的内心充满了自信和喜悦。  你轻轻松松的给出了一个“标准">
@@ -218,17 +218,11 @@
 <p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
 <p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑!跳入需谨慎。为什么?</p>
 <ul>
-<li><ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-</ol>
+<li><p>1.GET与POST都有自己的语义，不能随便混用。</p>
 </li>
-<li><ol>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-</ol>
+<li><p>2.据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</p>
 </li>
-<li><ol>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
-</ol>
+<li><p>3.并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</p>
 </li>
 </ul>
 <p><strong> 现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是这样的? </strong></p>
